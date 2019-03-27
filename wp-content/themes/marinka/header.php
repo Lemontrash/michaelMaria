@@ -17,10 +17,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+    <link rel="stylesheet" type="text/css" href="<?= get_bloginfo('template_url'); ?>/assets/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="<?= get_bloginfo('template_url'); ?>/assets/slick/slick-theme.css"/>
 	<?php wp_head(); ?>
 </head>
 <body>
-	<div class="Header">
+	<div class="Header" style="display:none;">
 		<div class="HeaderUpperRow"> 
 			<nav class="HeaderULeftMenu">
 			<?php	wp_nav_menu( [

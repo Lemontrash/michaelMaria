@@ -251,4 +251,306 @@ function register_post_types(){
         'rewrite'             => true,
         'query_var'           => true,
     ) );
+    register_post_type('our_team', array(
+        'label'  => null,
+        'labels' => array(
+            'name'               => 'Our Team', // основное название для типа записи
+            'singular_name'      => 'Our Team', // название для одной записи этого типа
+            'add_new'            => 'Добавить Our Team', // для добавления новой записи
+            'add_new_item'       => 'Добавление Our Team', // заголовка у вновь создаваемой записи в админ-панели.
+            'edit_item'          => 'Редактирование Our Team', // для редактирования типа записи
+            'new_item'           => 'Новое Our Team', // текст новой записи
+            'view_item'          => 'Смотреть Our Team', // для просмотра записи этого типа.
+            'search_items'       => 'Искать Our Team', // для поиска по этим типам записи
+            'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+            'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+            'parent_item_colon'  => '', // для родителей (у древовидных типов)
+            'menu_name'          => 'Our Team', // название меню
+        ),
+        'description'         => '',
+        'public'              => true,
+        'publicly_queryable'  => null, // зависит от public
+        'exclude_from_search' => null, // зависит от public
+        'show_ui'             => null, // зависит от public
+        'show_in_menu'        => null, // показывать ли в меню адмнки
+        'show_in_admin_bar'   => null, // по умолчанию значение show_in_menu
+        'show_in_nav_menus'   => null, // зависит от public
+        'show_in_rest'        => null, // добавить в REST API. C WP 4.7
+        'rest_base'           => null, // $post_type. C WP 4.7
+        'menu_position'       => null,
+        'menu_icon'           => null,
+        //'capability_type'   => 'post',
+        //'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
+        //'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+        'hierarchical'        => false,
+        'supports'            => array('title','editor'), // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+        'taxonomies'          => array(),
+        'has_archive'         => false,
+        'rewrite'             => true,
+        'query_var'           => true,
+    ) );
+    register_post_type('yacht', array(
+        'label'  => null,
+        'labels' => array(
+            'name'               => 'yacht', // основное название для типа записи
+            'singular_name'      => 'yacht', // название для одной записи этого типа
+            'add_new'            => 'Добавить yacht', // для добавления новой записи
+            'add_new_item'       => 'Добавление yacht', // заголовка у вновь создаваемой записи в админ-панели.
+            'edit_item'          => 'Редактирование yacht', // для редактирования типа записи
+            'new_item'           => 'Новое yacht', // текст новой записи
+            'view_item'          => 'Смотреть yacht', // для просмотра записи этого типа.
+            'search_items'       => 'Искать yacht', // для поиска по этим типам записи
+            'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+            'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+            'parent_item_colon'  => '', // для родителей (у древовидных типов)
+            'menu_name'          => 'yacht', // название меню
+        ),
+        'description'         => '',
+        'public'              => true,
+        'publicly_queryable'  => null, // зависит от public
+        'exclude_from_search' => null, // зависит от public
+        'show_ui'             => null, // зависит от public
+        'show_in_menu'        => null, // показывать ли в меню адмнки
+        'show_in_admin_bar'   => null, // по умолчанию значение show_in_menu
+        'show_in_nav_menus'   => null, // зависит от public
+        'show_in_rest'        => null, // добавить в REST API. C WP 4.7
+        'rest_base'           => null, // $post_type. C WP 4.7
+        'menu_position'       => null,
+        'menu_icon'           => null,
+        //'capability_type'   => 'post',
+        //'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
+        //'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+        'hierarchical'        => false,
+        'supports'            => array('title','editor'), // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+        'taxonomies'          => array(),
+        'has_archive'         => false,
+        'rewrite'             => true,
+        'query_var'           => true,
+    ) );
+}
+
+
+
+function wptp_create_post_type() {
+    $labels = array(
+        'name' => __( 'Lessons' ),
+        'singular_name' => __( 'Lessons' ),
+        'add_new' => __( 'New Lesson' ),
+        'add_new_item' => __( 'Add New Lesson' ),
+        'edit_item' => __( 'Edit Lesson' ),
+        'new_item' => __( 'New Lesson' ),
+        'view_item' => __( 'View Lesson' ),
+        'search_items' => __( 'Search Lessons' ),
+        'not_found' =>  __( 'No Lessons Found' ),
+        'not_found_in_trash' => __( 'No Articles found in Trash' ),
+    );
+    $args = array(
+        'labels' => $labels,
+        'has_archive' => true,
+        'public' => true,
+        'hierarchical' => false,
+        'menu_position' => 5,
+        'supports' => array(
+            'title',
+            'editor',
+            'excerpt',
+            'custom-fields',
+            'thumbnail'
+        ),
+    );
+    register_post_type( 'lessons', $args );
+}
+
+add_action( 'init', 'wptp_create_post_type' );
+
+
+
+function wptp_register_taxonomy() {
+    register_taxonomy( 'lessons_tax', 'lessons',
+        array(
+            'labels' => array(
+                'name'              => 'Article Categories',
+                'singular_name'     => 'Article Category',
+                'search_items'      => 'Search Article Categories',
+                'all_items'         => 'All Article Categories',
+                'edit_item'         => 'Edit Article Categories',
+                'update_item'       => 'Update Article Category',
+                'add_new_item'      => 'Add New Article Category',
+                'new_item_name'     => 'New Article Category Name',
+                'menu_name'         => 'Lessons',
+            ),
+            'hierarchical' => true,
+            'sort' => true,
+            'args' => array( 'orderby' => 'term_order' ),
+            'show_admin_column' => true
+        )
+    );
+}
+add_action( 'init', 'wptp_register_taxonomy' );
+
+function wpb_set_post_views($postID) {  // views counter
+    $count_key = 'wpb_post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        $count = 0;
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+    }else{
+        $count++;
+        update_post_meta($postID, $count_key, $count);
+    }
+}
+function wpb_track_post_views ($post_id) {
+    if ( !is_single() ) return;
+    if ( empty ( $post_id) ) {
+        global $post;
+        $post_id = $post->ID;
+    }
+    wpb_set_post_views($post_id);
+}
+function wpb_get_post_views($postID){
+    $count_key = 'wpb_post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+        return "0 View";
+    }
+    return $count.' Views';
+}
+
+add_action( 'wp_head', 'wpb_track_post_views');
+//To keep the count accurate, lets get rid of prefetching
+remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+
+
+function postsSlider(){
+    $args = array(
+        'posts_per_page' =>-1,
+        'post_type' => 'post',
+    );
+
+    $query = new WP_Query( $args );
+
+    // Цикл
+    if ( $query->have_posts() ) {
+        $counter = 0;
+
+        while ( $query->have_posts() ) {
+
+            $query->the_post();
+            $age = get_field('job',$post->ID);
+            $testimonial_image_url = get_field('testimonials_photo',$post->ID);
+
+            ?>
+            <div class="FBPostSliderItem">
+                <img src="<?= get_bloginfo('template_url'); ?>/assets/img/SliderItem1.png" class="FBPostSliderImg">
+                <h4 class="FBPostSliderHeading"><?= get_the_title(); ?></h4>
+                <span class="FBPostSliderTxt"> <?= get_the_content(); ?> </span>
+                <a href="#toPost" class="FBPostSliderButton">קרא עוד</a>
+            </div>
+            <?php
+        }
+    }
+    wp_reset_postdata();
+}
+
+function hiddenContentOnButton(){
+    $args = array(
+        'posts_per_page' =>3,
+        'post_type' => 'testimonials',
+    );
+
+    $query = new WP_Query( $args );
+
+    // Цикл
+    if ( $query->have_posts() ) {
+        $counter = 0;
+
+        while ( $query->have_posts() ) {
+
+            $query->the_post();
+            $job = get_field('job',$post->ID);
+            $testimonial_image_url = get_field('testimonials_photo',$post->ID);
+
+            ?>
+            <div class="TBTestimonialRow">
+                <img src="" class="TBTestimonialImg">
+                <div class="TBTTxtBlock">
+                    <span class="TBTestimonialTxt"><?= get_the_content(); ?></span>
+                    <span class="TBTestimonialCredentials"><?= $job; ?></span>
+                </div>
+            </div>
+            <?php
+        }
+    }
+
+    wp_reset_postdata();
+}
+
+function ourTeam(){
+    $args = array(
+        'posts_per_page' =>3,
+        'post_type' => 'ourteam',
+    );
+
+    $query = new WP_Query( $args );
+
+    // Цикл
+    if ( $query->have_posts() ) {
+        $counter = 0;
+
+        while ( $query->have_posts() ) {
+
+            $query->the_post();
+            $name = get_field('name',$post->ID);
+            $email = get_field('email',$post->ID);
+            $bio = get_field('bio',$post->ID);
+//            $testimonial_image_url = get_field('testimonials_photo',$post->ID);
+
+            ?>
+            <?= get_the_title(); ?>
+            <?= $name; ?>
+            <?= $email; ?>
+            <?= $bio; ?>
+
+
+            <?php
+        }
+    }
+
+    wp_reset_postdata();
+}
+
+function filterYachts(){
+    $args = array(
+        'posts_per_page' -1,
+        'post_type' => 'yacht',
+    );
+
+    $query = new WP_Query( $args );
+
+    // Цикл
+    if ( $query->have_posts() ) {
+        while ( $query->have_posts() ) {
+
+            $query->the_post();
+            $name = get_field('name',$post->ID);
+            $email = get_field('email',$post->ID);
+            $bio = get_field('bio',$post->ID);
+//            $testimonial_image_url = get_field('testimonials_photo',$post->ID);
+
+            ?>
+
+            <?= get_the_title(); ?>
+            <?= $name; ?>
+            <?= $email; ?>
+            <?= $bio; ?>
+
+
+            <?php
+        }
+    }
+
+    wp_reset_postdata();
 }

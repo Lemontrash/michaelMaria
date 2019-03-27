@@ -12,7 +12,7 @@
 ?>
 
 <!-- 	</div>#content -->
-<div class="Footer">
+<div class="Footer" style="display:none;">
     <form action="" method="post">
 
     </form>

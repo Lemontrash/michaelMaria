@@ -17,7 +17,7 @@ Template Name: Homepage
     }
 </script>
 
-<div class="fullpage">
+<div class="fullpage" >
 
 	<div class="section">
 		<div class="main_wrapper">
@@ -46,6 +46,7 @@ Template Name: Homepage
 	<!-- Second Block -->
 
 	<div class="section">
+        <?= ourTeam(); ?>
 			<div class="main_wrapper">
 				<div class="SecondBlock">
 					<div class="SBTxtBlock" style="background-size:cover; background-image:url(<?= get_bloginfo('template_url'); ?>/assets/img/SecondBlock1Back.png">
@@ -105,38 +106,7 @@ Template Name: Homepage
 					<a href="#more" class="TBTButton" onclick="show()">קרא עוד</a>
 
 					<div class="TBTHiddenContent">
-                        <?php
-                        $args = array(
-                            'posts_per_page' =>6,
-                            'post_type' => 'testimonials'
-                        );
-
-                        $query = new WP_Query( $args );
-
-                        // Цикл
-                        if ( $query->have_posts() ) {
-                            while ( $query->have_posts() ) {
-
-                                $query->the_post();
-                                $age = get_field('job',$post->ID);
-                                $testimonial_image_url = get_field('testimonials_photo',$post->ID);
-
-//                                $text = the_content();
-//                                $age = the_title();
-                                ?>
-                                <div class="TBTestimonialRow">
-                                    <img src="" class="TBTestimonialImg">
-                                    <div class="TBTTxtBlock">
-                                        <span class="TBTestimonialTxt"><?= get_the_content(); ?></span>
-                                        <span class="TBTestimonialCredentials"><?= $age; ?></span>
-                                    </div>
-                                </div>
-                                <?php
-                            }
-                        }
-
-                        wp_reset_postdata();
-                        ?>
+                        <?= hiddenContentOnButton() ?>
 <!---->
 <!--						<div class="TBTestimonialRow">-->
 <!--							<img src="--><?//= get_bloginfo('template_url'); ?><!--/assets/img/TestimonialsPhoto2.png" class="TBTestimonialImg">-->
@@ -157,7 +127,37 @@ Template Name: Homepage
 			</div>
 	</div>
 
-
+<!--    --><?php //
+//    $args = array(
+//        'posts_per_page' =>-1,
+//        'post_type' => 'post',
+//    );
+//
+//    $query = new WP_Query( $args );
+//
+//    // Цикл
+//    if ( $query->have_posts() ) {
+//        $counter = 0;
+//
+//        while ( $query->have_posts() ) {
+//
+//            $query->the_post();
+//            $age = get_field('job',$post->ID);
+//            $testimonial_image_url = get_field('testimonials_photo',$post->ID);
+//
+//            ?>
+<!--            <div class="FBPostSliderItem">-->
+<!--                <img src="--><?//= get_bloginfo('template_url'); ?><!--/assets/img/SliderItem1.png" class="FBPostSliderImg">-->
+<!--                <h4 class="FBPostSliderHeading">--><?//= get_the_title(); ?><!--</h4>-->
+<!--                <span class="FBPostSliderTxt"> --><?//= get_the_content(); ?><!-- </span>-->
+<!--                <a href="#toPost" class="FBPostSliderButton">קרא עוד</a>-->
+<!--            </div>-->
+<!--            --><?php
+//        }
+//    }
+//
+//    wp_reset_postdata();
+//    ?>
 
 <!-- Fourth Block -->
 
@@ -167,29 +167,11 @@ Template Name: Homepage
 					<h2 class="FBHeading">בלוג</h2>
 
 
-					<div class="FBPostSliderRow">
-						<div class="FBPostSliderItem">
-							<img src="<?= get_bloginfo('template_url'); ?>/assets/img/SliderItem1.png" class="FBPostSliderImg">
-							<h4 class="FBPostSliderHeading">היאכטות היקרות בעולם</h4>
-							<span class="FBPostSliderTxt">אם בשלב הסקיצה העיצובית עדיין לא קיים הטקסט הרלוונטי, לא מומלץ למקם טקסט אמיתי אחר</span>
-							<a href="#toPost" class="FBPostSliderButton">קרא עוד</a>
-						</div>
-						<div class="FBPostSliderItem">
-							<img src="<?= get_bloginfo('template_url'); ?>/assets/img/SliderItem2.png" class="FBPostSliderImg">
-							<h4 class="FBPostSliderHeading">שיטות קשירה מתקדמות</h4>
-							<span class="FBPostSliderTxt">אם בשלב הסקיצה העיצובית עדיין לא קיים הטקסט הרלוונטי, לא מומלץ למקם טקסט אמיתי אחר</span>
-							<a href="#toPost" class="FBPostSliderButton">קרא עוד</a>
-						</div>
-						<div class="FBPostSliderItem">
-							<img src="<?= get_bloginfo('template_url'); ?>/assets/img/SliderItem3.png" class="FBPostSliderImg">
-							<h4 class="FBPostSliderHeading">היאכטות היקרות בעולם</h4>
-							<span class="FBPostSliderTxt">אם בשלב הסקיצה העיצובית עדיין לא קיים הטקסט הרלוונטי, לא מומלץ למקם טקסט אמיתי אחר</span>
-							<a href="#toPost" class="FBPostSliderButton">קרא עוד</a>
-						</div>
-					</div>
+					<div class="FBPostSliderRow" >
 
+                        <?= postsSlider() ?>
 
-				</div>
+				    </div>
 			</div>
 	</div>
 
@@ -278,7 +260,23 @@ Template Name: Homepage
              
               
 </div>
-
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="<?= get_bloginfo('template_url'); ?>/assets/slick/slick.min.js"></script>
+    <script type="text/javascript">
+        // var el = document.getElementsByClassName('FBPostSliderItem');
+        // for (var a in el){
+        //     a.style.width = "300px";
+        // }
+        // document.getElementsByClassName('FBPostSliderItem').forEach(function (element) {
+        //     element.style.width = '200px';
+        // });
+        $('.FBPostSliderRow').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+    </script>
 <?php
 get_footer();
 ?>
