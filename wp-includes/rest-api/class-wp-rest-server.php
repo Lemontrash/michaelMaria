@@ -1331,4 +1331,5 @@ class WP_REST_Server {
 
 		return $headers;
 	}
+
 }

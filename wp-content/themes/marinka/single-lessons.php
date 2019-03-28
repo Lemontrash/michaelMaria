@@ -49,13 +49,16 @@ get_header();
         <?php
 
         while ( have_posts() ) :
+
             the_post();
+            $headline = get_field('headline',$post->ID);
+            echo get_the_content();
+            echo '<br>';
+            echo $headline;
+            echo '<br>';
+            wpb_set_post_views(get_the_ID());
 
-           echo get_the_content();
-           echo '<br>';
-           echo wpb_set_post_views(get_the_ID());
-
-           echo wpb_get_post_views(get_the_ID());
+            echo wpb_get_post_views(get_the_ID());
 
 
         endwhile; // End of the loop.
