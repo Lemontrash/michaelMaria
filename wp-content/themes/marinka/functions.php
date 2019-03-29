@@ -119,6 +119,8 @@ add_action( 'widgets_init', 'marinka_widgets_init' );
 /**
  * Enqueue scripts and styles.
  */
+//add_filter('json_enabled', '__return_false');
+//add_filter('json_jsonp_enabled', '__return_false');
 
 
 function marinka_scripts() {

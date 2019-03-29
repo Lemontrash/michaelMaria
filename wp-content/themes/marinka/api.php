@@ -12,12 +12,18 @@ class MMKStruct{
         }
     }
 }
+
+
 //echo 'Curl: ', function_exists('curl_version') ? 'Enabled' : 'Disabled';
 $opts = array(
     'ssl' => array(
         'ciphers' => 'RC4-SHA',
         'verify_peer' => false,
-        'verify_peer_name' => false
+        'verify_peer_name' => false,
+        'http' => array(
+            'user_agent' => 'PHPSoapClient'
+        )
+
     )
 );
 $params = array(
@@ -33,7 +39,10 @@ $params = array(
 
 
 $wsdl = 'https://www.booking-manager.com/cbm_web_service2/services/CBM?wsdl';
+
 $soapClient = new SoapClient($wsdl, $params);
+
+
 
 try{
     $struct = new MMKStruct(array('3497', 'office@sea-time.co.il', 'seatime0', '225', '2019', 'true', 0));
