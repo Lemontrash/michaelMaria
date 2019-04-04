@@ -60,7 +60,7 @@ get_header();
             margin-bottom: 30px;
         }
         .options{
-            padding: 0 40px 0 40px ;
+            padding: 0 40px 0 40px;
             min-height: 320px;
             margin-top: 50px;
             background-color: #1D9FB3;
