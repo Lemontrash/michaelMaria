@@ -285,7 +285,7 @@ function register_post_types(){
         //'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
         //'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
         'hierarchical'        => false,
-        'supports'            => array('title','editor'), // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+        'supports'            => array('title','editor','thumbnail'), // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
         'taxonomies'          => array(),
         'has_archive'         => false,
         'rewrite'             => true,
@@ -493,8 +493,8 @@ function hiddenContentOnButton(){
 
 function ourTeam(){
     $args = array(
-        'posts_per_page' =>3,
-        'post_type' => 'ourteam',
+        'posts_per_page' =>4,
+        'post_type' => 'our_team',
     );
 
     $query = new WP_Query( $args );
@@ -506,16 +506,27 @@ function ourTeam(){
         while ( $query->have_posts() ) {
 
             $query->the_post();
-            $name = get_field('name',$post->ID);
-            $email = get_field('email',$post->ID);
-            $bio = get_field('bio',$post->ID);
+//            $name = get_field('name',$post->ID);
+//            $email = get_field('email',$post->ID);
+//            $bio = get_field('bio',$post->ID);
 //            $testimonial_image_url = get_field('testimonials_photo',$post->ID);
 
             ?>
-            <?= get_the_title(); ?>
-            <?= $name; ?>
-            <?= $email; ?>
-            <?= $bio; ?>
+
+            <div class="our-team-element">
+                <div class="photo">
+                    <img  class="floatImageContent" src="<?= the_post_thumbnail_url($post->ID) ?>" alt="">
+                </div>
+                <h2>
+                    <?= get_the_title(); ?>
+                </h2>
+                <h3>
+                    <?= get_field('position',$post->ID); ?>
+                </h3>
+                <div class="text">
+                    <?= the_content() ?>
+                </div>
+            </div>
 
 
             <?php
@@ -557,3 +568,5 @@ function filterYachts(){
 
     wp_reset_postdata();
 }
+
+do_action( 'nice_likes_custom' );
