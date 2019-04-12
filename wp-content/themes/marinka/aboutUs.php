@@ -2,7 +2,10 @@
 /*
 Template Name: AboutUs
 */
-
+//require 'curl.php';
+insertAll();
+getAllDataFromDb();
+exit();
 get_header();
 
 ?>

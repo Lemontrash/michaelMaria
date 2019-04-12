@@ -31,14 +31,21 @@ get_header();
             flex-direction: row;
             justify-content: space-between;
         }
+        .blog-wrapper .content p{
+            overflow: hidden;
+            max-height: 44px;
+            margin-bottom: 0;
+        }
         .blog-wrapper .content .element{
             flex-direction: column;
             flex-wrap: wrap;
             transition: 1.3s;
             text-align: center;
+            max-width: 250px;
+            max-height: 270px;
         }
         .blog-wrapper .content .image{
-            background-color: #ff3324;
+            /*background-color: #ff3324;*/
             width: 250px;
             height: 150px;
         }
@@ -73,6 +80,7 @@ get_header();
             border: solid #d5d6db 2px;
             border-radius: 20PX;
             margin-bottom: 30px;
+            margin-top: 15px;
             /*vertical-align: center;*/
             /*transition: 1.2s;*/
         }
@@ -87,87 +95,127 @@ get_header();
             cruises in Israel
         </h1>
         <div class="content">
-            <div class="element">
-                <div class="image">
-                    <div class="image-bgc"></div>
-                </div>
-                <div class="title">
-                    title
-                </div>
-                <div class="text">
-                    text
-                </div>
-                <button>
-                    <a href=""> GO </a>
-                </button>
-            </div>
-            <div class="element">
-                <div class="image">
-                    <div class="image-bgc"></div>
-                </div>
-                <div class="title">
-                    title
-                </div>
-                <div class="text">
-                    text
-                </div>
-                <button>
-                    <a href=""> GO </a>
-                </button>
-            </div>
-            <div class="element">
-                <div class="image">
-                    <div class="image-bgc"></div>
-                </div>
-                <div class="title">
-                    title
-                </div>
-                <div class="text">
-                    text
-                </div>
-                <button>
-                    <a href=""> GO </a>
-                </button>
-            </div><div class="element">
-                <div class="image">
-                    <div class="image-bgc"></div>
-                </div>
-                <div class="title">
-                    title
-                </div>
-                <div class="text">
-                    text
-                </div>
-                <button>
-                    <a href=""> GO </a>
-                </button>
-            </div><div class="element">
-                <div class="image">
-                    <div class="image-bgc"></div>
-                </div>
-                <div class="title">
-                    title
-                </div>
-                <div class="text">
-                    text
-                </div>
-                <button>
-                    <a href=""> GO </a>
-                </button>
-            </div><div class="element">
-                <div class="image">
-                    <div class="image-bgc"></div>
-                </div>
-                <div class="title">
-                    title
-                </div>
-                <div class="text">
-                    text
-                </div>
-                <button>
-                    <a href=""> GO </a>
-                </button>
-            </div>
+
+            <?php
+            $args = array(
+                'posts_per_page'    => -1,
+                'post_type'         => 'post',
+                'orderby'           => 'date',
+                'order'             => 'DESC',
+                'category_name'     => 'israel',
+            );
+
+            $query = new WP_Query( $args );
+
+            if ( $query->have_posts() ) :
+                while ( $query->have_posts() ) :
+                    $query->the_post();
+                    $title = get_the_title();
+                    $content = get_the_content();
+                    ?>
+                    <div class="element">
+                        <div class="image" style="background-image:url(<?= the_post_thumbnail_url($post->ID)?>);">
+                            <div class="image-bgc"></div>
+                        </div>
+                        <div class="title">
+                            <?= $title ?>
+                        </div>
+                        <div class="text">
+                            <?= the_excerpt()?>
+                        </div>
+                        <button>
+                            <a href="<?= get_permalink() ?>"> GO </a>
+                        </button>
+                    </div>
+
+
+                <?php
+                endwhile;
+            endif;
+
+            wp_reset_postdata();
+            ?>
+<!--            <div class="element">-->
+<!--                <div class="image">-->
+<!--                    <div class="image-bgc"></div>-->
+<!--                </div>-->
+<!--                <div class="title">-->
+<!--                    title-->
+<!--                </div>-->
+<!--                <div class="text">-->
+<!--                    text-->
+<!--                </div>-->
+<!--                <button>-->
+<!--                    <a href=""> GO </a>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="element">-->
+<!--                <div class="image">-->
+<!--                    <div class="image-bgc"></div>-->
+<!--                </div>-->
+<!--                <div class="title">-->
+<!--                    title-->
+<!--                </div>-->
+<!--                <div class="text">-->
+<!--                    text-->
+<!--                </div>-->
+<!--                <button>-->
+<!--                    <a href=""> GO </a>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="element">-->
+<!--                <div class="image">-->
+<!--                    <div class="image-bgc"></div>-->
+<!--                </div>-->
+<!--                <div class="title">-->
+<!--                    title-->
+<!--                </div>-->
+<!--                <div class="text">-->
+<!--                    text-->
+<!--                </div>-->
+<!--                <button>-->
+<!--                    <a href=""> GO </a>-->
+<!--                </button>-->
+<!--            </div><div class="element">-->
+<!--                <div class="image">-->
+<!--                    <div class="image-bgc"></div>-->
+<!--                </div>-->
+<!--                <div class="title">-->
+<!--                    title-->
+<!--                </div>-->
+<!--                <div class="text">-->
+<!--                    text-->
+<!--                </div>-->
+<!--                <button>-->
+<!--                    <a href=""> GO </a>-->
+<!--                </button>-->
+<!--            </div><div class="element">-->
+<!--                <div class="image">-->
+<!--                    <div class="image-bgc"></div>-->
+<!--                </div>-->
+<!--                <div class="title">-->
+<!--                    title-->
+<!--                </div>-->
+<!--                <div class="text">-->
+<!--                    text-->
+<!--                </div>-->
+<!--                <button>-->
+<!--                    <a href=""> GO </a>-->
+<!--                </button>-->
+<!--            </div><div class="element">-->
+<!--                <div class="image">-->
+<!--                    <div class="image-bgc"></div>-->
+<!--                </div>-->
+<!--                <div class="title">-->
+<!--                    title-->
+<!--                </div>-->
+<!--                <div class="text">-->
+<!--                    text-->
+<!--                </div>-->
+<!--                <button>-->
+<!--                    <a href=""> GO </a>-->
+<!--                </button>-->
+<!--            </div>-->
 
         </div>
     </div>

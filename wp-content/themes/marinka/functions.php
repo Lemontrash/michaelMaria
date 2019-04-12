@@ -429,7 +429,7 @@ remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 
 function postsSlider(){
     $args = array(
-        'posts_per_page' =>-1,
+        'posts_per_page' =>5,
         'post_type' => 'post',
     );
 
@@ -447,7 +447,18 @@ function postsSlider(){
 
             ?>
             <div class="FBPostSliderItem">
-                <img src="<?= get_bloginfo('template_url'); ?>/assets/img/SliderItem1.png" class="FBPostSliderImg">
+                <?php
+                    if ($testimonial_image_url){
+                        ?>
+
+                        <?php
+                    }
+                    else{
+                        ?>
+                        <img src="<?= get_bloginfo('template_url'); ?>/assets/img/SliderItem1.png" class="FBPostSliderImg">
+                        <?php
+                    }
+                ?>
                 <h4 class="FBPostSliderHeading"><?= get_the_title(); ?></h4>
                 <span class="FBPostSliderTxt"> <?= get_the_content(); ?> </span>
                 <a href="#toPost" class="FBPostSliderButton">קרא עוד</a>
@@ -457,7 +468,10 @@ function postsSlider(){
     }
     wp_reset_postdata();
 }
-
+//function custom_excerpt_length( $length ) {
+//    return 12;
+//}
+//add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 function hiddenContentOnButton(){
     $args = array(
         'posts_per_page' =>3,
@@ -506,10 +520,6 @@ function ourTeam(){
         while ( $query->have_posts() ) {
 
             $query->the_post();
-//            $name = get_field('name',$post->ID);
-//            $email = get_field('email',$post->ID);
-//            $bio = get_field('bio',$post->ID);
-//            $testimonial_image_url = get_field('testimonials_photo',$post->ID);
 
             ?>
 

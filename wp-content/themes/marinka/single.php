@@ -7,31 +7,19 @@
  * @package Marinka
  */
 
-get_header();
+  $post = $wp_query->post;
+
+  if (in_category('blog') || in_category('israel') || in_category('world')) { //slug  категории
+      include(TEMPLATEPATH.'/single-blog.php');
+  }
+//  elseif(in_category('world') && in_category('blog')){
+//      include(TEMPLATEPATH.'/single-blog.php');
+//  }
+//  elseif(in_category('israel' && in_category('blog'))){
+//      include(TEMPLATEPATH.'/single-blog.php');
+//  }
+  else {
+      include(TEMPLATEPATH.'/single-default.php');
+  }
+
 ?>
-
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
-
-		<?php
-		while ( have_posts() ) :
-			the_post();
-
-			get_template_part( 'template-parts/content', get_post_type() );
-
-			the_post_navigation();
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-
-		endwhile; // End of the loop.
-		?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
-<?php
-get_sidebar();
-get_footer();

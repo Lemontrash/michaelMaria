@@ -1,41 +1,95 @@
 <?php
-//use this to test iv curl is enabled, if it is not then you should enable it
-//echo 'Curl: ', function_exists('curl_version') ? 'Enabled' : 'Disabled';
-
-$soap_request	= "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"xmlns:cbm=\"http://cbm.mmk.com\">\n";
-$soap_request .= "<soapenv:Header/>\n";
-$soap_request .= "<soapenv:Body>\n";
-$soap_request .= "	<cbm:getResources>\n";
-$soap_request .= "	<cbm:in0>3497</cbm:in0>\n";
-$soap_request .= "	<cbm:in1>office@sea-time.co.il</cbm:in1>\n";
-$soap_request .= "	<cbm:in2>seatime0</cbm:in2>\n";
-$soap_request .= "	<cbm:in3>225</cbm:in3>\n";
-$soap_request .= "	</cbm:getBases>\n";
-$soap_request .= "</soapenv:Body>\n";
-$soap_request .= "</soapenv:Envelope>\n";
-
-$header = array(
-    "Content­type: text/xml;charset=\"utf­8\"", "Accept: text/xml",
-    "Cache­Control: no­cache", "Pragma: no­cache", "SOAPAction: \"run\"",
-    "Content­length: ".strlen($soap_request),
-);
-
-$soap_do = curl_init();
-curl_setopt($soap_do, CURLOPT_URL, "https://www.booking-manager.com/cbm_web_service2/services/CBM");
-curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 60);
-curl_setopt($soap_do, CURLOPT_TIMEOUT,	60);
-curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true );
-curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
-curl_setopt($soap_do, CURLOPT_POST,	true );
-curl_setopt($soap_do, CURLOPT_POSTFIELDS,	$soap_request);
-curl_setopt($soap_do, CURLOPT_HTTPHEADER,	$header);
-$result = curl_exec($soap_do);
-//var_dump($result);
-if($result === false) {
-    $err = 'Curl error: ' . curl_error($soap_do);
-    curl_close($soap_do); print $err;
-} else {
-    curl_close($soap_do); print $result;
-}
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
+
+
+<?php
+
+
+//class MMKSruct {
+//    public function __construct($a) {
+//        $i=0;
+//        foreach($a as $var=>$val) {
+//            $varName = 'in'.$i;
+//            $this->$varName = $val;
+//            $i++;
+//        }
+//    }
+//}
+
+
+//// specify orl
+//$wsdl = 'http://www.booking-manager.com/cbm_web_service2/services/CBM?wsdl';
+//
+//// load client with definitions
+//$soapClient = new SoapClient($wsdl, Array('trace'=>1));
+//
+//try {
+//    $struct = new MMKSruct(Array(3497,'office@sea-time.co.il','seatime0', 225));
+//
+//    $result = $soapClient->getResources($struct);
+//
+//    if (isset($result->out)) {
+//        $xml = $result->out;
+//        echo $xml;
+//    }
+//}
+//
+//catch (Exception $e) {
+//    print_r($soapClient->__getLastRequest());
+//    print_r($soapClient->__getLastResponse());
+//    print_r($e->getTrace());
+//    var_dump($e);
+//}
+//
+//$tmp = $soapClient->__getLastResponse();            //получение запроса и обрезание убейте хорватов пожалуйста
+//$response = html_entity_decode($tmp);
+//$response = stristr($response, '<root>');
+//$pos = strpos($response, '</ns1:out>');
+//$response = substr($response, 0, $pos);
+//$obj = new SimpleXMLElement($response);
+//
+
+$index = 0;
+foreach ($obj->resource as  $resource){
+    $counter = 0;
+    $time = strtotime($resource->prices->price[0]->attributes()['datefrom']);
+    foreach ($resource->prices as $price){
+        foreach ($price as $key => $item) {
+            if ($time < strtotime($item->attributes()['datefrom'])){
+                $time = strtotime($item->attributes()['datefrom']);
+                $price = $item->attributes()['price'];
+                $index = $counter;
+            }
+            $counter++;
+
+        }
+        echo $index.' ';
+        echo '<br>';
+        $index = 0;
+    }
+
+    foreach ($resource->images as $image){
+
+    }
+
+    foreach ($resource->equipment as $equipment){
+
+    }
+
+    foreach ($resource->extras as $extra) {
+
+    }
+
+//    $resource->locations->attributes(); ??????????????????????/
+}
+
+?>
+<pre>
+<?php
+
+print_r($obj);
+?>
+</pre>

@@ -60,25 +60,82 @@ get_header();
             margin-bottom: 30px;
         }
         .options{
-            padding: 0 40px 0 40px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            padding:20px 40px 20px 40px;
             min-height: 320px;
+            max-height: 320px;
             margin-top: 50px;
             background-color: #1D9FB3;
             -webkit-box-shadow: 0px 0px 61px -9px rgba(29,159,179,1);
             -moz-box-shadow: 0px 0px 61px -9px rgba(29,159,179,1);
             box-shadow: 0px 0px 61px -9px rgba(29,159,179,1);
         }
-        .options h2{
-
+        .options .opt{
+            width: 40%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border-top: solid #51b5c5 1px;
+        }
+        /*.options .opt:nth-child(6){*/
+            /*margin-top: 73px;*/
+            /*width: 40%;*/
+            /*display: flex;*/
+            /*flex-direction: row;*/
+            /*justify-content: space-between;*/
+            /*border-top: solid #51b5c5 1px;*/
+        /*}*/
+        .options .opt span:first-child{
+            color: white;
+            font-weight: 400;
+            margin: 5px;
+            font-size: 16px;
+            padding-top: 3px;
+        }
+        .options .opt span:last-child{
+            margin: 5px;
+            opacity: 0.5;
+            color: white;
+            font-size: 18px;
+            padding-top: 2px;
+            font-weight: 200;
+        }
+        .options .spacer-left h2{
             text-transform: capitalize;
             color: white;
             font-size: 34px;
             margin: 0;
         }
+        .options .other{
+            position: absolute;
+            bottom: 34px;
+            left: 50.5%;
+        }
+        .options .other a{
+            color: #a7d3dc;
+            text-decoration: underline;
+        }
+        .options .other a:visited{
+            color: #a7d3dc;
+            text-decoration: underline;
+        }
         .line{
+            margin-bottom: 20px;
             height: 2px;
             width: 30px;
             background-color: white;
+        }
+        .spacer-left{
+            width: 50%;
+        }
+        .spacer-right{
+            width: 50%;
+        }
+        .spacer-right h2{
+            opacity: 0;
         }
     </style>
 
@@ -124,28 +181,34 @@ get_header();
         </div>
 
         <div class="options">
-            <h2>Options</h2>
-            <div class="line"></div>
-            <div class="loa">
+            <div class="spacer-left">
+                <h2>Options</h2>
+            </div>
 
+            <div class="line"></div>
+            <div class="opt">
+                <span>LOA</span> <span>2</span>
             </div>
             <div class="opt">
-                <span></span> <span></span>
+                <span>Beam</span> <span>2</span>
             </div>
             <div class="opt">
-                <span></span> <span></span>
+                <span>Project</span> <span>2</span>
             </div>
             <div class="opt">
-                <span></span> <span></span>
+                <span>Light Offset</span> <span>2</span>
             </div>
             <div class="opt">
-                <span></span> <span></span>
+                <span>Max engine power</span> <span>2</span>
+            </div>
+            <div class="spacer-right">
+                <h2>Options</h2>
             </div>
             <div class="opt">
-                <span></span> <span></span>
+                <span>Fuel Tank</span> <span>2</span>
             </div>
             <div class="opt">
-                <span></span> <span></span>
+                <span>Fresh water</span> <span>2</span>
             </div>
             <div class="other">
                 <a href="#">other models</a>
